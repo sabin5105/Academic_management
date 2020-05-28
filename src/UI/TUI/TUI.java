@@ -39,6 +39,11 @@ public class TUI {
             }
         }
     }
+    /**
+     * 등록
+     * 직업, 이름, 나이, 주소, 주민번호, 교과목, 부서를 항목에 따라 입력한다.
+     * 등록할 수 없을 경우 오류 메세지를 출력한다.
+     */
     public void Registrate(){
         while(true){
             printTitle();
@@ -78,38 +83,43 @@ public class TUI {
                 printSystemMessage("등록할 수 없습니다.", true);
             }
         }
-    }
+    }//Registration
+    /**
+     * 삭제
+     * 입력된 주민번호로 해당되는 사람의 정보를 삭제한다.
+     * 해당하는 ID가 없을 경우 오류 메세지를 출력한다.
+     */
     public void Delete() {
         while (true) {
             printTitle();
             printSubTitle(" 삭 제 하 기");
-            int personId = inputInt(" 삭제할 사람의 주민번호를 입력하여 주십시오. (0 : 이전메뉴) ");
-            if (personId == 0) {
+            int ID_number = inputInt(" 삭제할 사람의 주민번호를 입력하여 주십시오. (0 : 이전메뉴) ");
+            if (ID_number == 0) {
                 return;
             }
 
-            if (manager.Delete(personId)) {
+            if (manager.Delete(ID_number)) {
                 printSystemMessage("삭제되었습니다.", true);
             } else {
                 printSystemMessage("존재하는 ID가 없습니다.", true);
             }
         }
-    } // deletePerson()
+    } // Delete()
 
     /**
-     * 사람 조회
+     * 조회
      * 입력된 주민번호로 해당되는 사람의 정보를 출력한다.
      * 해당되는 사람이 없을 경우 오류 메세지를 출력한다.
      */
     public void inquire() {
         printTitle();
         printSubTitle(" 조 회 하 기");
-        int personId = inputInt(" 조회할 사람의 주민번호를 입력하여 주십시오. (0 : 이전메뉴) ");
-        if (personId == 0) {
+        int ID_number = inputInt(" 조회할 사람의 주민번호를 입력하여 주십시오. (0 : 이전메뉴) ");
+        if (ID_number == 0) {
             return;
         }
 
-        Person person = manager.inquire(personId);
+        Person person = manager.inquire(ID_number);
         if (person != null) {
             System.out.println(singleLine);
             System.out.printf(listFormat, "Name", "ID N.O", "Age", "Address", "AdditionalInfo");
@@ -141,7 +151,7 @@ public class TUI {
             System.out.println(personToString(person));
         }
         printSystemMessage("조회된 데이터 입니다.", true);
-    } // selectAllPerson()
+    } // PrintAll()
 
     /**
      * 리스트로 된 질문의 답을 입력받는다.
@@ -167,7 +177,7 @@ public class TUI {
 
     /**
      * Person 객체를 String포맷에 맞도록 출력한다. (포맷은 listFormat이다.)
-     * Person.toString()은 각각의 정보가 "|"를 구분자로 하여 리턴된다.
+     * Person.toString()은 각각의 정보가 "|"를 구분자로 하여 리턴한다.
      * @param person 출력할 객체
      * @return listFormat에 맞춘 출력물
      */
