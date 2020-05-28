@@ -1,10 +1,10 @@
-package Manager;
-import java.util.*;
+package manager;
 import vo.Person;
+import java.util.*;
 
 //Arraylist 이용 Manger
 public class CollectionManager implements Manager{
-    ArrayList persons = new ArrayList();
+    ArrayList<Person> persons = new ArrayList<Person>();
 
     public CollectionManager(){};   //Default
 

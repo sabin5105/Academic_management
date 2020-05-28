@@ -1,4 +1,4 @@
-package Manager;
+package manager;
 import java.util.*;
 import vo.Person;
 

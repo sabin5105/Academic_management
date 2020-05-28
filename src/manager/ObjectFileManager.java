@@ -1,11 +1,11 @@
-package Manager;
-import vo.Person;
-import java.util.ArrayList;
+package manager;
+import vo.*;
+import java.util.*;
 import java.io.*;
 
 public class ObjectFileManager implements Manager{
 
-    ArrayList persons;
+    ArrayList<Person> persons;
 
     public ObjectFileManager() {
         File file = new File("persons.dat");

@@ -1,13 +1,16 @@
 package UI.TUI;
 
 import java.util.*;
-import Manager.*;
+import manager.*;
 import vo.*;
 
 public class TUI {
     private String doubleLine = "=========================================================";
     private String singleLine = "---------------------------------------------------------";
     private String listFormat = "%10s%10s%10s%20s%20s\n";
+
+    Scanner scanner = new Scanner(System.in);
+    Manager manager = new CollectionManager();  // Manager Package에서 원하는 동작 선택
 
     public TUI( ) {
         while (true) {
@@ -69,7 +72,7 @@ public class TUI {
                     break;
             } // switch
 
-            if (Manager.Registrate(newPerson)) {
+            if (manager.Registrate(newPerson)) {
                 printSystemMessage("등록되었습니다.", true);
             } else {
                 printSystemMessage("등록할 수 없습니다.", true);
@@ -85,7 +88,7 @@ public class TUI {
                 return;
             }
 
-            if (Manager.Delete(personId)) {
+            if (manager.Delete(personId)) {
                 printSystemMessage("삭제되었습니다.", true);
             } else {
                 printSystemMessage("존재하는 ID가 없습니다.", true);
@@ -106,7 +109,7 @@ public class TUI {
             return;
         }
 
-        Person person = Manager.inquire(personId);
+        Person person = manager.inquire(personId);
         if (person != null) {
             System.out.println(singleLine);
             System.out.printf(listFormat, "Name", "ID N.O", "Age", "Address", "AdditionalInfo");
@@ -128,7 +131,7 @@ public class TUI {
         printTitle();
         printSubTitle(" 전 체 조 회");
 
-        ArrayList persons = Manager.Printall();
+        ArrayList<Person> persons = manager.Printall();
 
         System.out.println(singleLine);
         System.out.printf(listFormat, "Name", "ID N.O", "Age", "Address", "AdditionalInfo");
@@ -236,7 +239,7 @@ public class TUI {
         if (isPause) {
             System.out.println(" 계속하시려면 아무거나 입력하여 주십시오.");
             //scanner.skip("[\\n\\r]");
-            Scanner.next();
+            scanner.next();
             //System.out.println("DEBUG @22222");
         }
     }
